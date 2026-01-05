@@ -1,22 +1,23 @@
 "use client";
-import { Google_Sans_Code, Poppins } from "next/font/google";
-import { useState } from "react";
-import { ImRocket } from "react-icons/im";
-import { FaArrowRight, FaEye, FaEyeSlash } from "react-icons/fa";
+import { Space_Grotesk } from "next/font/google";
+import { useState, useEffect } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const googleSansText = Google_Sans_Code({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400"],
-});
-
-const googleSansDisplay = Poppins({
-  subsets: ["latin"],
-  weight: ["900"],
+  weight: ["700"],
 });
 
 export default function AuthPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showUrlError, setShowUrlError] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -24,97 +25,174 @@ export default function AuthPage() {
     confirmPassword: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(isLogin ? "Logging in..." : "Registering...", formData);
-  };
+  // Read error from URL on mount
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam === "CredentialsSignin" && !showUrlError) {
+      setError("Invalid email or password");
+      setShowUrlError(true);
+      // Clear the error from URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [searchParams, showUrlError]);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      if (isLogin) {
+        const result = await signIn("credentials", {
+          email: formData.email,
+          password: formData.password,
+          redirect: false, // Changed to false
+        });
+
+        if (result?.error) {
+          setError("Invalid email or password");
+          setLoading(false);
+        } else if (result?.ok) {
+          router.push("/dashboard");
+        }
+      } else {
+        const response = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          if (data.details && Array.isArray(data.details)) {
+            const errorMessages = data.details
+              .map((err) => `${err.field}: ${err.message}`)
+              .join("\n");
+            setError(errorMessages);
+          } else {
+            setError(data.error || "Registration failed");
+          }
+          setLoading(false);
+        } else {
+          const signInResult = await signIn("credentials", {
+            email: formData.email,
+            password: formData.password,
+            redirect: false,
+          });
+
+          if (signInResult?.error) {
+            setError(
+              "Registration successful, but login failed. Please try signing in."
+            );
+            setLoading(false);
+          } else if (signInResult?.ok) {
+            router.push("/dashboard");
+          }
+        }
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+      setLoading(false);
+      console.error(err);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      await signIn("google", { callbackUrl: "/dashboard" });
+    } catch (err) {
+      setError("Google sign-in failed");
+      setLoading(false);
+      console.error(err);
+    }
   };
 
   return (
     <div
-      className={`${googleSansDisplay.className}  w-full min-h-screen  text-white overflow-hidden flex items-center justify-center`}
+      className={`${spaceGrotesk.className}  w-full min-h-screen  text-white overflow-hidden flex items-center justify-center font-extrabold`}
     >
-      {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-linear-to-br from-black via-blue-950/20 to-black"></div>
         <div className="absolute top-1/4 left-1/4 w-200 h-200 bg-blue-500/10 blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-200 h-200 bg-blue-600/10 blur-3xl"></div>
       </div>
 
-      {/* Main Content */}
       <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12">
-        {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-6"></div>
 
           <h1 className="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter mb-8 leading-none">
             <span className="block">
-              <span
-                className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-blue-600"
-                style={{ fontFamily: "var(--font-google-sans-display)" }}
-              >
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-blue-600">
                 {isLogin ? "WELCOME" : "JOIN"}
               </span>
             </span>
             <span className="block mt-2">
-              <span
-                className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 via-blue-500 to-blue-700 p-2"
-                style={{ fontFamily: "var(--font-google-sans-display)" }}
-              >
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 via-blue-500 to-blue-700 p-2">
                 {isLogin ? "BACK" : "US"}
               </span>
             </span>
           </h1>
 
           <p
-            className={`${googleSansText.className} text-3xl sm:text-4xl font-light mb-8 tracking-tight`}
+            className={`${spaceGrotesk.className} text-3xl sm:text-4xl font-light mb-8 tracking-tighter`}
           >
             {isLogin ? "Sign in to continue" : "Create your free account"}
           </p>
         </div>
 
-        {/* Auth Container */}
         <div className="max-w-2xl mx-auto">
-          {/* Toggle Switch */}
           <div className="flex border-10 border-blue-500 mb-12">
             <button
-              onClick={() => setIsLogin(true)}
+              onClick={() => {
+                setIsLogin(true);
+                setError("");
+              }}
               className={`flex-1 py-6 text-3xl font-extralight transition-all duration-300 ${
                 isLogin
                   ? "bg-blue-500 text-white"
                   : "bg-black text-blue-400 hover:text-white"
               }`}
-              style={{ fontFamily: "var(--font-google-sans-text)" }}
             >
               LOGIN
             </button>
             <button
-              onClick={() => setIsLogin(false)}
+              onClick={() => {
+                setIsLogin(false);
+                setError("");
+              }}
               className={`flex-1 py-6 text-3xl font-extralight transition-all duration-300 ${
                 !isLogin
                   ? "bg-blue-500 text-white"
                   : "bg-black text-blue-400 hover:text-white"
               }`}
-              style={{ fontFamily: "var(--font-google-sans-text)" }}
             >
               REGISTER
             </button>
           </div>
 
-          {/* Form */}
+          {error && (
+            <div className="mb-8 p-6 bg-red-500/20 border-2 border-red-500 text-red-300 text-lg whitespace-pre-wrap">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-8">
             {!isLogin && (
               <div>
-                <label
-                  className="block text-2xl text-blue-400 mb-4 font-light"
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
-                >
+                <label className="block text-2xl text-blue-400 mb-4 font-light">
                   FULL NAME
                 </label>
                 <div className="relative">
@@ -125,19 +203,14 @@ export default function AuthPage() {
                     onChange={handleChange}
                     className="w-full px-0 py-5 text-2xl bg-transparent border-0 border-b-2 border-blue-800 focus:border-b-blue-500 focus:outline-none transition-colors font-light placeholder-blue-600"
                     placeholder="Enter your full name"
-                    requiblue={!isLogin}
-                    style={{ fontFamily: "var(--font-google-sans-text)" }}
+                    required={!isLogin}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500/0 group-hover:bg-blue-500 transition-all duration-300"></div>
                 </div>
               </div>
             )}
 
             <div>
-              <label
-                className="block text-2xl text-blue-400 mb-4 font-light"
-                style={{ fontFamily: "var(--font-google-sans-text)" }}
-              >
+              <label className="block text-2xl text-blue-400 mb-4 font-light">
                 EMAIL ADDRESS
               </label>
               <div className="relative">
@@ -148,18 +221,13 @@ export default function AuthPage() {
                   onChange={handleChange}
                   className="w-full px-0 py-5 text-2xl bg-transparent border-0 border-b-2 border-blue-800 focus:border-b-blue-500 focus:outline-none transition-colors font-light placeholder-blue-600"
                   placeholder="you@example.com"
-                  requiblue
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
+                  required
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500/0 group-hover:bg-blue-500 transition-all duration-300"></div>
               </div>
             </div>
 
             <div>
-              <label
-                className="block text-2xl text-blue-400 mb-4 font-light"
-                style={{ fontFamily: "var(--font-google-sans-text)" }}
-              >
+              <label className="block text-2xl text-blue-400 mb-4 font-light">
                 PASSWORD
               </label>
               <div className="relative">
@@ -170,8 +238,7 @@ export default function AuthPage() {
                   onChange={handleChange}
                   className="w-full px-0 py-5 text-2xl bg-transparent border-0 border-b-2 border-blue-800 focus:border-b-blue-500 focus:outline-none transition-colors font-light placeholder-blue-600 pr-16"
                   placeholder="••••••••"
-                  requiblue
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
+                  required
                 />
                 <button
                   type="button"
@@ -180,16 +247,12 @@ export default function AuthPage() {
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500/0 group-hover:bg-blue-500 transition-all duration-300"></div>
               </div>
             </div>
 
             {!isLogin && (
               <div>
-                <label
-                  className="block text-2xl text-blue-400 mb-4 font-light"
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
-                >
+                <label className="block text-2xl text-blue-400 mb-4 font-light">
                   CONFIRM PASSWORD
                 </label>
                 <div className="relative">
@@ -200,10 +263,8 @@ export default function AuthPage() {
                     onChange={handleChange}
                     className="w-full px-0 py-5 text-2xl bg-transparent border-0 border-b-2 border-blue-800 focus:border-b-blue-500 focus:outline-none transition-colors font-light placeholder-blue-600"
                     placeholder="••••••••"
-                    requiblue={!isLogin}
-                    style={{ fontFamily: "var(--font-google-sans-text)" }}
+                    required={!isLogin}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500/0 group-hover:bg-blue-500 transition-all duration-300"></div>
                 </div>
               </div>
             )}
@@ -219,7 +280,6 @@ export default function AuthPage() {
                   <label
                     htmlFor="remember"
                     className="text-xl text-blue-400 font-light"
-                    style={{ fontFamily: "var(--font-google-sans-text)" }}
                   >
                     Remember me
                   </label>
@@ -227,61 +287,55 @@ export default function AuthPage() {
                 <button
                   type="button"
                   className="text-xl text-blue-400 hover:text-blue-300 transition-colors font-light"
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
                 >
                   Forgot password?
                 </button>
               </div>
             )}
 
-            {/* Submit Button */}
             <button
               type="submit"
-              className="group relative w-full py-8 text-4xl font-extralight overflow-hidden transition-all duration-300 hover:scale-[1.02] border-10 border-blue-500 bg-black mt-12"
+              disabled={loading}
+              className="group relative w-full py-8 text-4xl font-extralight overflow-hidden transition-all duration-300 hover:scale-[1.02] border-10 border-blue-500 bg-black mt-12 disabled:opacity-50 disabled:hover:scale-100"
             >
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 via-blue-800 to-blue-600 animate-gradient-x"></div>
               <div className="absolute inset-0.75 bg-black"></div>
               <span className="relative flex items-center justify-center gap-6 text-white">
-                {/* <ImRocket className="text-5xl text-blue-300" /> */}
-                <span
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
-                  className="font-light"
-                >
-                  {isLogin ? "SIGN IN" : "CREATE ACCOUNT"}
+                <span className="font-light">
+                  {loading
+                    ? "LOADING..."
+                    : isLogin
+                    ? "SIGN IN"
+                    : "CREATE ACCOUNT"}
                 </span>
-                {/* <FaArrowRight className="text-4xl group-hover:translate-x-4 transition-transform" /> */}
               </span>
             </button>
+
             <button
-              type="submit"
-              className="group relative w-full py-8 text-4xl font-extralight overflow-hidden transition-all duration-300 hover:scale-[1.02] border-10 border-blue-500 bg-black"
+              type="button"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="group relative w-full py-8 text-4xl font-extralight overflow-hidden transition-all duration-300 hover:scale-[1.02] border-10 border-blue-500 bg-black disabled:opacity-50 disabled:hover:scale-100"
             >
               <div className="absolute inset-0 bg-linear-to-r from-blue-600 via-blue-800 to-blue-600 animate-gradient-x"></div>
               <div className="absolute inset-0.75 bg-black"></div>
               <span className="relative flex items-center justify-center gap-6 text-white">
-                {/* <ImRocket className="text-5xl text-blue-300" /> */}
-                <span
-                  style={{ fontFamily: "var(--font-google-sans-text)" }}
-                  className="font-light"
-                >
+                <span className="font-light">
                   {isLogin ? "SIGN IN WITH GOOGLE" : "SIGN UP WITH GOOGLE"}
                 </span>
-                {/* <FaArrowRight className="text-4xl group-hover:translate-x-4 transition-transform" /> */}
               </span>
             </button>
           </form>
 
-          {/* Switch Prompt */}
           <div className="mt-16 text-center">
-            <p
-              className="text-2xl text-blue-400 font-light"
-              style={{ fontFamily: "var(--font-google-sans-text)" }}
-            >
+            <p className="text-2xl text-blue-400 font-light">
               {isLogin ? "Don't have an account?" : "Already have an account?"}
               <button
-                onClick={() => setIsLogin(!isLogin)}
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setError("");
+                }}
                 className="ml-3 text-blue-400 hover:text-blue-300 transition-colors underline"
-                style={{ fontFamily: "var(--font-google-sans-text)" }}
               >
                 {isLogin ? "Sign up" : "Sign in"}
               </button>
@@ -320,7 +374,6 @@ export default function AuthPage() {
           box-shadow: none;
         }
 
-        /* Custom checkbox styling */
         input[type="checkbox"] {
           -webkit-appearance: none;
           -moz-appearance: none;

@@ -3,11 +3,6 @@ import { Poppins } from "next/font/google";
 import { useState } from "react";
 import { PiToggleRight, PiToggleLeft, PiX } from "react-icons/pi";
 
-const googleSansDisplay = Poppins({
-  subsets: ["latin"],
-  weight: ["900", "400"],
-});
-
 export default function SettingsPage() {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [searchNotifications, setSearchNotifications] = useState(false);
@@ -39,38 +34,21 @@ export default function SettingsPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Header */}
           <div className="mb-20">
-            <h1
-              className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-6"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h1 className="text-6xl sm:text-8xl tracking-0 font-extrabold mb-6">
               <span className="text-white">SETTINGS</span>
             </h1>
-            <p
-              className="text-2xl text-blue-400"
-              style={{
-                fontFamily: googleSansDisplay.style.fontFamily,
-                fontWeight: 400,
-              }}
-            >
-              Manage your preferences
-            </p>
+            <p className="text-2xl text-blue-400">Manage your preferences</p>
           </div>
 
           {/* Account Section */}
           <div className="mb-20">
-            <h2
-              className="text-4xl font-extrabold text-blue-400 mb-8"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h2 className="text-4xl font-extrabold text-blue-400 mb-8">
               ACCOUNT
             </h2>
             <div className="space-y-4">
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Email Address
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -79,22 +57,15 @@ export default function SettingsPage() {
                 </div>
                 <button
                   onClick={() => setModalOpen("email")}
-                  className="px-8 py-4 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="px-8 py-4 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
                 >
                   CHANGE
                 </button>
               </div>
 
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Password
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -103,22 +74,15 @@ export default function SettingsPage() {
                 </div>
                 <button
                   onClick={() => setModalOpen("password")}
-                  className="px-8 py-4 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="px-8 py-4 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
                 >
                   CHANGE
                 </button>
               </div>
 
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Two-Factor Authentication
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -127,11 +91,7 @@ export default function SettingsPage() {
                 </div>
                 <button
                   onClick={() => setModalOpen("2fa")}
-                  className="px-8 py-4 border-10 border-green-600/50 hover:bg-green-600/20 transition text-green-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="px-8 py-4 border-5 border-green-600/50 hover:bg-green-600/20 transition text-green-400 font-semibold"
                 >
                   ENABLE
                 </button>
@@ -141,19 +101,13 @@ export default function SettingsPage() {
 
           {/* Notifications Section */}
           <div className="mb-20">
-            <h2
-              className="text-4xl font-extrabold text-blue-400 mb-8"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h2 className="text-4xl font-extrabold text-blue-400 mb-8">
               NOTIFICATIONS
             </h2>
             <div className="space-y-4">
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Email Notifications
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -172,12 +126,9 @@ export default function SettingsPage() {
                 </button>
               </div>
 
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Search Result Alerts
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -200,19 +151,13 @@ export default function SettingsPage() {
 
           {/* Preferences Section */}
           <div className="mb-20">
-            <h2
-              className="text-4xl font-extrabold text-blue-400 mb-8"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h2 className="text-4xl font-extrabold text-blue-400 mb-8">
               PREFERENCES
             </h2>
             <div className="space-y-4">
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Dark Mode
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -231,23 +176,14 @@ export default function SettingsPage() {
                 </button>
               </div>
 
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Language
                   </div>
                   <div className="text-blue-400 text-sm mt-2">English</div>
                 </div>
-                <button
-                  className="px-8 py-4 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
-                >
+                <button className="px-8 py-4 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold">
                   CHANGE
                 </button>
               </div>
@@ -256,19 +192,13 @@ export default function SettingsPage() {
 
           {/* Subscription Section */}
           <div className="mb-20">
-            <h2
-              className="text-4xl font-extrabold text-blue-400 mb-8"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h2 className="text-4xl font-extrabold text-blue-400 mb-8">
               SUBSCRIPTION
             </h2>
             <div className="space-y-4">
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Current Plan
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
@@ -277,35 +207,22 @@ export default function SettingsPage() {
                 </div>
                 <button
                   onClick={() => setModalOpen("upgrade")}
-                  className="px-8 py-4 border-10 border-green-600/50 hover:bg-green-600/20 transition text-green-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="px-8 py-4 border-5 border-green-600/50 hover:bg-green-600/20 transition text-green-400 font-semibold"
                 >
                   UPGRADE
                 </button>
               </div>
 
-              <div className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
+              <div className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Storage Usage
                   </div>
                   <div className="text-blue-400 text-sm mt-2">
                     2.4GB / 10GB used
                   </div>
                 </div>
-                <button
-                  className="px-8 py-4 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
-                >
+                <button className="px-8 py-4 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold">
                   MANAGE
                 </button>
               </div>
@@ -314,19 +231,13 @@ export default function SettingsPage() {
 
           {/* Danger Zone */}
           <div>
-            <h2
-              className="text-4xl font-extrabold text-red-500 mb-8"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h2 className="text-4xl font-extrabold text-red-500 mb-8">
               DANGER ZONE
             </h2>
             <div className="space-y-4">
-              <div className="border-10 border-red-600/50 p-8 bg-red-950/20 hover:bg-red-950/30 transition flex items-center justify-between">
+              <div className="border-5 border-red-600/50 p-8 bg-red-950/20 hover:bg-red-950/30 transition flex items-center justify-between">
                 <div>
-                  <div
-                    className="text-lg font-extrabold text-white"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-lg font-extrabold text-white">
                     Delete Account
                   </div>
                   <div className="text-red-400/60 text-sm mt-2">
@@ -335,11 +246,7 @@ export default function SettingsPage() {
                 </div>
                 <button
                   onClick={() => setModalOpen("delete")}
-                  className="px-8 py-4 border-10 border-red-600/50 hover:bg-red-600/20 transition text-red-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="px-8 py-4 border-5 border-red-600/50 hover:bg-red-600/20 transition text-red-400 font-semibold"
                 >
                   DELETE
                 </button>
@@ -352,12 +259,9 @@ export default function SettingsPage() {
       {/* Email Modal */}
       {modalOpen === "email" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-2xl">
             <div className="border-b border-blue-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-white"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h2 className="text-3xl font-extrabold text-white">
                 CHANGE EMAIL
               </h2>
               <button
@@ -369,13 +273,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-8">
-              <label
-                className="text-lg text-blue-400 font-semibold mb-4 block"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 600,
-                }}
-              >
+              <label className="text-lg text-blue-400 font-semibold mb-4 block">
                 NEW EMAIL ADDRESS
               </label>
               <input
@@ -383,22 +281,19 @@ export default function SettingsPage() {
                 placeholder="Enter your new email"
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
-                className="w-full px-8 py-4 text-xl bg-black border-10 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="w-full px-8 py-4 text-xl bg-black border-5 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
               />
 
               <div className="flex gap-4">
                 <button
                   onClick={handleSaveEmail}
-                  className="flex-1 px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
                 >
                   SAVE
                 </button>
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>
@@ -411,12 +306,9 @@ export default function SettingsPage() {
       {/* Password Modal */}
       {modalOpen === "password" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-2xl">
             <div className="border-b border-blue-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-white"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h2 className="text-3xl font-extrabold text-white">
                 CHANGE PASSWORD
               </h2>
               <button
@@ -428,13 +320,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-8">
-              <label
-                className="text-lg text-blue-400 font-semibold mb-4 block"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 600,
-                }}
-              >
+              <label className="text-lg text-blue-400 font-semibold mb-4 block">
                 NEW PASSWORD
               </label>
               <input
@@ -442,22 +328,19 @@ export default function SettingsPage() {
                 placeholder="Enter new password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-8 py-4 text-xl bg-black border-10 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="w-full px-8 py-4 text-xl bg-black border-5 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
               />
 
               <div className="flex gap-4">
                 <button
                   onClick={handleSavePassword}
-                  className="flex-1 px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
                 >
                   SAVE
                 </button>
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>
@@ -470,14 +353,9 @@ export default function SettingsPage() {
       {/* 2FA Modal */}
       {modalOpen === "2fa" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-2xl">
             <div className="border-b border-blue-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-white"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
-                ENABLE 2FA
-              </h2>
+              <h2 className="text-3xl font-extrabold text-white">ENABLE 2FA</h2>
               <button
                 onClick={() => setModalOpen(null)}
                 className="p-3 hover:bg-blue-600/20 transition"
@@ -487,10 +365,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-8">
-              <p
-                className="text-white text-lg mb-8"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <p className="text-white text-lg mb-8">
                 Scan this QR code with your authenticator app to enable
                 two-factor authentication.
               </p>
@@ -501,15 +376,13 @@ export default function SettingsPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-green-600/50 bg-green-600/20 hover:bg-green-600/30 transition font-extrabold text-green-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-green-600/50 bg-green-600/20 hover:bg-green-600/30 transition font-extrabold text-green-400"
                 >
                   VERIFY
                 </button>
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>
@@ -522,12 +395,9 @@ export default function SettingsPage() {
       {/* Upgrade Modal */}
       {modalOpen === "upgrade" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-2xl">
             <div className="border-b border-blue-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-white"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h2 className="text-3xl font-extrabold text-white">
                 UPGRADE PLAN
               </h2>
               <button
@@ -539,14 +409,11 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-8">
-              <p
-                className="text-white text-lg mb-4"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <p className="text-white text-lg mb-4">
                 Choose a plan that works for you.
               </p>
               <div className="space-y-4 mb-8">
-                <div className="border-10 border-blue-600 p-6 bg-black/50">
+                <div className="border-5 border-blue-600 p-6 bg-black/50">
                   <div className="text-xl font-extrabold text-white mb-2">
                     Pro • $29/month
                   </div>
@@ -554,7 +421,7 @@ export default function SettingsPage() {
                     100GB storage • Priority support
                   </div>
                 </div>
-                <div className="border-10 border-blue-600 p-6 bg-black/50">
+                <div className="border-5 border-blue-600 p-6 bg-black/50">
                   <div className="text-xl font-extrabold text-white mb-2">
                     Business • $99/month
                   </div>
@@ -567,15 +434,13 @@ export default function SettingsPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-green-600/50 bg-green-600/20 hover:bg-green-600/30 transition font-extrabold text-green-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-green-600/50 bg-green-600/20 hover:bg-green-600/30 transition font-extrabold text-green-400"
                 >
                   UPGRADE
                 </button>
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>
@@ -588,12 +453,9 @@ export default function SettingsPage() {
       {/* Delete Modal */}
       {modalOpen === "delete" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-red-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-red-600 w-full max-w-2xl">
             <div className="border-b border-red-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-red-500"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h2 className="text-3xl font-extrabold text-red-500">
                 DELETE ACCOUNT
               </h2>
               <button
@@ -605,10 +467,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="p-8">
-              <p
-                className="text-white text-lg mb-8"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <p className="text-white text-lg mb-8">
                 Are you sure you want to delete your account? This action cannot
                 be undone. All your documents and data will be permanently
                 deleted.
@@ -617,15 +476,13 @@ export default function SettingsPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-red-600/50 bg-red-600/20 hover:bg-red-600/30 transition font-extrabold text-red-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-red-600/50 bg-red-600/20 hover:bg-red-600/30 transition font-extrabold text-red-400"
                 >
                   DELETE PERMANENTLY
                 </button>
                 <button
                   onClick={() => setModalOpen(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>

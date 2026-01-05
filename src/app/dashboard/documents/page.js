@@ -3,11 +3,6 @@ import { Poppins } from "next/font/google";
 import { useState } from "react";
 import { PiPlus, PiTrash } from "react-icons/pi";
 
-const googleSansDisplay = Poppins({
-  subsets: ["latin"],
-  weight: ["900", "400"],
-});
-
 export default function DocumentsLibrary() {
   // Mock data
   const mockDocuments = [
@@ -69,30 +64,18 @@ export default function DocumentsLibrary() {
           {/* Header */}
           <div className="mb-20 flex items-center justify-between">
             <div>
-              <h1
-                className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-4"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h1 className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-4">
                 <span className="text-white">MY</span>
                 <span className="block text-blue-500">DOCUMENTS</span>
               </h1>
-              <p
-                className="text-2xl text-blue-400"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 400,
-                }}
-              >
+              <p className="text-2xl text-blue-400">
                 <span className="text-white font-extrabold">
                   {mockDocuments.length}
                 </span>{" "}
                 documents total
               </p>
             </div>
-            <button
-              className="flex items-center gap-3 px-10 py-6 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition h-fit font-extrabold text-lg"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <button className="flex items-center gap-3 px-10 py-6 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition h-fit font-extrabold text-lg">
               <PiPlus className="text-3xl" />
               <span>UPLOAD</span>
             </button>
@@ -103,55 +86,31 @@ export default function DocumentsLibrary() {
             {mockDocuments.map((doc) => (
               <div
                 key={doc.id}
-                className="border-10 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition aspect-square flex flex-col justify-between group"
+                className="border-5 border-blue-600 p-8 bg-black/50 hover:bg-black/70 transition aspect-square flex flex-col justify-between group"
               >
                 <div className="flex flex-col h-full justify-between">
                   <div>
-                    <div
-                      className="text-3xl text-white font-extrabold mb-6 line-clamp-3 leading-tight"
-                      style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                    >
+                    <div className="text-3xl text-white font-extrabold mb-6 line-clamp-3 leading-tight">
                       {doc.name.replace(/\.[^/.]+$/, "")}
                     </div>
                     <div className="space-y-2">
-                      <div
-                        className="text-sm text-blue-400 font-semibold"
-                        style={{
-                          fontFamily: googleSansDisplay.style.fontFamily,
-                          fontWeight: 600,
-                        }}
-                      >
+                      <div className="text-sm text-blue-400 font-semibold">
                         {doc.pages} PAGES
                       </div>
-                      <div
-                        className="text-sm text-blue-400 font-semibold"
-                        style={{
-                          fontFamily: googleSansDisplay.style.fontFamily,
-                          fontWeight: 600,
-                        }}
-                      >
+                      <div className="text-sm text-blue-400 font-semibold">
                         {doc.chunks} CHUNKS
                       </div>
-                      <div
-                        className="text-xs text-blue-500/60 font-semibold"
-                        style={{
-                          fontFamily: googleSansDisplay.style.fontFamily,
-                          fontWeight: 600,
-                        }}
-                      >
+                      <div className="text-xs text-blue-500/60 font-semibold">
                         ADDED {doc.uploaded.toUpperCase()}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex gap-2 mt-6 pt-6 border-t border-blue-600/30">
-                    <button
-                      className="flex-1 px-4 py-3 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-extrabold text-sm"
-                      style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                    >
+                    <button className="flex-1 px-4 py-3 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-extrabold text-sm">
                       SEARCH
                     </button>
-                    <button className="px-4 py-3 border-10 border-red-600/50 hover:bg-red-600/20 transition text-red-400">
+                    <button className="px-4 py-3 border-5 border-red-600/50 hover:bg-red-600/20 transition text-red-400">
                       <PiTrash className="text-2xl" />
                     </button>
                   </div>

@@ -1,6 +1,8 @@
 "use client";
 import { Poppins, Lobster } from "next/font/google";
 import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import {
   PiGear,
   PiCaretDown,
@@ -24,6 +26,8 @@ const googleSansDisplay = Poppins({
 
 export default function Navbar({ currentPage = "dashboard" }) {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   // Navigation items for logged-in users
   const navItems = [
@@ -32,6 +36,23 @@ export default function Navbar({ currentPage = "dashboard" }) {
     { id: "search", label: "SEARCH", icon: PiMagnifyingGlass },
     { id: "collections", label: "COLLECTIONS", icon: PiFolders },
   ];
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    setShowProfileDropdown(false);
+    router.push("/auth");
+  };
+
+  // Get user initials from name
+  const getInitials = (name) => {
+    if (!name) return "U";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <div className="fixed top-0 w-full bg-black/80 backdrop-blur border-b border-blue-600/30 z-50">
@@ -103,7 +124,7 @@ export default function Navbar({ currentPage = "dashboard" }) {
                   className="flex items-center gap-3 px-4 py-2 border border-blue-600/30 hover:border-blue-500 transition group"
                 >
                   <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                    JD
+                    {getInitials(session?.user?.name)}
                   </div>
                   <span
                     className="text-white text-sm hidden sm:block"
@@ -112,7 +133,7 @@ export default function Navbar({ currentPage = "dashboard" }) {
                       fontWeight: 400,
                     }}
                   >
-                    John Doe
+                    {session?.user?.name || "User"}
                   </span>
                   <PiCaretDown className="text-blue-400 group-hover:text-blue-300" />
                 </button>
@@ -131,7 +152,7 @@ export default function Navbar({ currentPage = "dashboard" }) {
                       <PiUser className="text-lg" /> MY ACCOUNT
                     </a>
                     <a
-                      href="/dashbord/settings"
+                      href="/dashboard/settings"
                       className="w-full text-left px-4 py-2 text-white hover:bg-blue-600/20 border-b border-blue-600/30"
                       style={{
                         fontFamily: googleSansDisplay.style.fontFamily,
@@ -142,6 +163,7 @@ export default function Navbar({ currentPage = "dashboard" }) {
                       BILLING
                     </a>
                     <button
+                      onClick={handleLogout}
                       className="w-full text-left px-4 py-2 text-red-400 hover:bg-red-600/20 flex items-center gap-2"
                       style={{
                         fontFamily: googleSansDisplay.style.fontFamily,

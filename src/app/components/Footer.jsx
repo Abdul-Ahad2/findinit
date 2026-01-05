@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <>
       {/* Footer */}
-      <div className={`${googleSanCode.className} py-16 bg-black`}>
+      <div className={`py-16 bg-black`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center mb-12">
             <div
@@ -24,19 +24,13 @@ export default function Footer() {
             >
               Findinit.
             </div>
-            <p
-              className="text-3xl text-gray-400 font-light"
-              style={{ fontFamily: "var(--font-google-sans-text)" }}
-            >
+            <p className="text-3xl text-gray-400 font-light">
               Find anything. Instantly.
             </p>
           </div>
 
           <div className="pt-8 text-center">
-            <p
-              className="text-2xl text-gray-500 font-light"
-              style={{ fontFamily: "var(--font-google-sans-text)" }}
-            >
+            <p className="text-2xl text-gray-500 font-light">
               © | {new Date().getFullYear()} Findinit | All Rights Reserved
             </p>
           </div>

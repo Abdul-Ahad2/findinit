@@ -94,10 +94,7 @@ export default function SearchPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Header */}
           <div className="mb-16">
-            <h1
-              className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-6"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-            >
+            <h1 className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-6">
               <span className="text-white">SEARCH YOUR</span>
               <span className="block text-blue-500">DOCUMENTS</span>
             </h1>
@@ -112,13 +109,11 @@ export default function SearchPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-                className="flex-1 px-8 py-6 text-xl bg-black border-10 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="flex-1 px-8 py-6 text-xl bg-black border-5 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition"
               />
               <button
                 onClick={handleSearch}
-                className="px-10 py-6 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold text-lg"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="px-10 py-6 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold text-lg"
               >
                 SEARCH
               </button>
@@ -127,11 +122,7 @@ export default function SearchPage() {
                   onClick={() =>
                     setShowCollectionDropdown(!showCollectionDropdown)
                   }
-                  className="w-full px-10 py-6 border-10 border-blue-600 bg-black/50 hover:bg-black/70 overflow-hidden transition flex items-center justify-between text-left text-lg font-semibold truncate"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
+                  className="w-full px-10 py-6 border-5 border-blue-600 bg-black/50 hover:bg-black/70 overflow-hidden transition flex items-center justify-between text-left text-lg font-semibold truncate"
                 >
                   <span className="truncate">
                     {getCollectionName(selectedCollection)}
@@ -144,7 +135,7 @@ export default function SearchPage() {
                 </button>
 
                 {showCollectionDropdown && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-black border-10 border-blue-600 z-40">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-black border-5 border-blue-600 z-40">
                     {collections.map((collection) => (
                       <button
                         key={collection.id}
@@ -157,10 +148,6 @@ export default function SearchPage() {
                             ? "bg-blue-600/30 text-blue-400"
                             : "text-white hover:bg-blue-600/10"
                         }`}
-                        style={{
-                          fontFamily: googleSansDisplay.style.fontFamily,
-                          fontWeight: 600,
-                        }}
                       >
                         {collection.name.toUpperCase()}
                       </button>
@@ -175,13 +162,7 @@ export default function SearchPage() {
           {hasSearched && (
             <div>
               <div className="mb-12">
-                <p
-                  className="text-2xl text-blue-400 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
-                >
+                <p className="text-2xl text-blue-400 font-semibold">
                   Found{" "}
                   <span className="text-white font-extrabold">
                     {filteredResults.length}
@@ -198,18 +179,12 @@ export default function SearchPage() {
                   {filteredResults.map((result) => (
                     <div
                       key={result.id}
-                      className="border-10 border-blue-600 p-10 bg-black/50 hover:bg-black/70 transition cursor-pointer"
+                      className="border-5 border-blue-600 p-10 bg-black/50 hover:bg-black/70 transition cursor-pointer"
                       onClick={() => setSelectedResult(result)}
                     >
                       <div className="flex items-start justify-between mb-6">
                         <div>
-                          <div
-                            className="text-lg text-blue-500 font-semibold"
-                            style={{
-                              fontFamily: googleSansDisplay.style.fontFamily,
-                              fontWeight: 600,
-                            }}
-                          >
+                          <div className="text-lg text-blue-500 font-semibold">
                             {result.doc} • PAGE {result.page}
                           </div>
                           {selectedCollection === "all" && (
@@ -223,11 +198,7 @@ export default function SearchPage() {
                             e.stopPropagation();
                             setSelectedResult(result);
                           }}
-                          className="px-6 py-2 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold text-sm"
-                          style={{
-                            fontFamily: googleSansDisplay.style.fontFamily,
-                            fontWeight: 600,
-                          }}
+                          className="px-6 py-2 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-semibold text-sm"
                         >
                           VIEW
                         </button>
@@ -240,15 +211,7 @@ export default function SearchPage() {
                 </div>
               ) : (
                 <div className="text-center py-16">
-                  <p
-                    className="text-2xl text-blue-400"
-                    style={{
-                      fontFamily: googleSansDisplay.style.fontFamily,
-                      fontWeight: 400,
-                    }}
-                  >
-                    No results found
-                  </p>
+                  <p className="text-2xl text-blue-400">No results found</p>
                 </div>
               )}
             </div>
@@ -257,19 +220,8 @@ export default function SearchPage() {
           {/* Empty State */}
           {!hasSearched && (
             <div className="flex flex-col items-center justify-center py-32">
-              <div
-                className="text-8xl text-blue-600/30 mb-8 font-light"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
-                ?
-              </div>
-              <p
-                className="text-3xl text-blue-400 text-center"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 400,
-                }}
-              >
+              <div className="text-8xl text-blue-600/30 mb-8 font-light">?</div>
+              <p className="text-3xl text-blue-400 text-center">
                 Start typing to search
                 <br />
                 your documents
@@ -282,23 +234,14 @@ export default function SearchPage() {
       {/* Modal Overlay */}
       {selectedResult && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="sticky top-0 bg-black border-b border-blue-600/30 p-8 flex items-center justify-between">
               <div>
-                <div
-                  className="text-2xl text-blue-500 font-semibold"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
-                >
+                <div className="text-2xl text-blue-500 font-semibold">
                   {selectedResult.doc}
                 </div>
-                <div
-                  className="text-sm text-blue-400 mt-2"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                >
+                <div className="text-sm text-blue-400 mt-2">
                   PAGE {selectedResult.page}
                 </div>
               </div>
@@ -313,13 +256,7 @@ export default function SearchPage() {
             {/* Modal Content */}
             <div className="p-8">
               <div className="mb-8 pb-8 border-b border-blue-600/30">
-                <h3
-                  className="text-xl text-blue-500 font-semibold mb-4"
-                  style={{
-                    fontFamily: googleSansDisplay.style.fontFamily,
-                    fontWeight: 600,
-                  }}
-                >
+                <h3 className="text-xl text-blue-500 font-semibold mb-4">
                   FULL CONTEXT
                 </h3>
                 <p className="text-white text-lg leading-relaxed font-light">
@@ -328,16 +265,12 @@ export default function SearchPage() {
               </div>
 
               <div className="flex gap-4">
-                <button
-                  className="flex-1 px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                >
+                <button className="flex-1 px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold">
                   OPEN DOCUMENT
                 </button>
                 <button
                   onClick={() => setSelectedResult(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CLOSE
                 </button>

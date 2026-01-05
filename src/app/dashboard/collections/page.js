@@ -85,27 +85,17 @@ export default function CollectionsPage() {
           {/* Header */}
           <div className="mb-20 flex items-center justify-between">
             <div>
-              <h1
-                className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-4"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h1 className="text-6xl sm:text-8xl tracking-tighter font-extrabold mb-4">
                 <span className="text-white">MY</span>
                 <span className="block text-blue-500">COLLECTIONS</span>
               </h1>
-              <p
-                className="text-2xl text-blue-400"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 400,
-                }}
-              >
+              <p className="text-2xl text-blue-400">
                 Organize and manage your document collections
               </p>
             </div>
             <button
               onClick={() => setShowNewCollection(true)}
-              className="flex items-center gap-3 px-10 py-6 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition h-fit font-extrabold text-lg"
-              style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+              className="flex items-center gap-3 px-10 py-6 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition h-fit font-extrabold text-lg"
             >
               <PiPlus className="text-3xl" />
               <span>NEW</span>
@@ -118,22 +108,13 @@ export default function CollectionsPage() {
               <div
                 key={collection.id}
                 onClick={() => setSelectedCollection(collection)}
-                className="border-10 border-blue-600 p-10 bg-black/50 hover:bg-black/70 transition cursor-pointer aspect-square flex flex-col justify-between group"
+                className="border-5 border-blue-600 p-10 bg-black/50 hover:bg-black/70 transition cursor-pointer aspect-square flex flex-col justify-between group"
               >
                 <div>
-                  <div
-                    className="text-4xl text-white font-extrabold mb-6 line-clamp-3 leading-tight"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                  >
+                  <div className="text-4xl text-white font-extrabold mb-6 line-clamp-3 leading-tight">
                     {collection.name}
                   </div>
-                  <div
-                    className="text-sm text-blue-400 font-semibold"
-                    style={{
-                      fontFamily: googleSansDisplay.style.fontFamily,
-                      fontWeight: 600,
-                    }}
-                  >
+                  <div className="text-sm text-blue-400 font-semibold">
                     {collection.count} DOCUMENTS
                   </div>
                 </div>
@@ -144,8 +125,7 @@ export default function CollectionsPage() {
                       e.stopPropagation();
                       setSelectedCollection(collection);
                     }}
-                    className="flex-1 px-4 py-3 border-10 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-extrabold text-sm"
-                    style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                    className="flex-1 px-4 py-3 border-5 border-blue-500 hover:bg-blue-500/20 transition text-blue-400 font-extrabold text-sm"
                   >
                     OPEN
                   </button>
@@ -154,7 +134,7 @@ export default function CollectionsPage() {
                       e.stopPropagation();
                       handleDeleteCollection(collection.id);
                     }}
-                    className="px-4 py-3 border-10 border-red-600/50 hover:bg-red-600/20 transition text-red-400"
+                    className="px-4 py-3 border-5 border-red-600/50 hover:bg-red-600/20 transition text-red-400"
                   >
                     <PiTrash className="text-2xl" />
                   </button>
@@ -165,25 +145,13 @@ export default function CollectionsPage() {
 
           {collections.length === 0 && (
             <div className="flex flex-col items-center justify-center py-32">
-              <div
-                className="text-8xl text-blue-600/30 mb-8 font-light"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
-                +
-              </div>
-              <p
-                className="text-3xl text-blue-400 text-center mb-8"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 400,
-                }}
-              >
+              <div className="text-8xl text-blue-600/30 mb-8 font-light">+</div>
+              <p className="text-3xl text-blue-400 text-center mb-8">
                 No collections yet
               </p>
               <button
                 onClick={() => setShowNewCollection(true)}
-                className="px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
               >
                 CREATE ONE
               </button>
@@ -195,12 +163,9 @@ export default function CollectionsPage() {
       {/* Create Collection Modal */}
       {showNewCollection && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-2xl">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-2xl">
             <div className="border-b border-blue-600/30 p-8 flex items-center justify-between">
-              <h2
-                className="text-3xl font-extrabold text-white"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-              >
+              <h2 className="text-3xl font-extrabold text-white">
                 CREATE COLLECTION
               </h2>
               <button
@@ -215,13 +180,7 @@ export default function CollectionsPage() {
             </div>
 
             <div className="p-8">
-              <label
-                className="text-lg text-blue-400 font-semibold mb-4 block"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 600,
-                }}
-              >
+              <label className="text-lg text-blue-400 font-semibold mb-4 block">
                 COLLECTION NAME
               </label>
               <input
@@ -232,15 +191,13 @@ export default function CollectionsPage() {
                 onKeyPress={(e) =>
                   e.key === "Enter" && handleCreateCollection()
                 }
-                className="w-full px-8 py-4 text-xl bg-black border-10 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
-                style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                className="w-full px-8 py-4 text-xl bg-black border-5 border-blue-500 text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 transition mb-8"
               />
 
               <div className="flex gap-4">
                 <button
                   onClick={handleCreateCollection}
-                  className="flex-1 px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
                 >
                   CREATE
                 </button>
@@ -249,8 +206,7 @@ export default function CollectionsPage() {
                     setShowNewCollection(false);
                     setNewCollectionName("");
                   }}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CANCEL
                 </button>
@@ -263,19 +219,13 @@ export default function CollectionsPage() {
       {/* Collection Details Modal */}
       {selectedCollection && !showNewCollection && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center p-4">
-          <div className="bg-black border-10 border-blue-600 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-black border-5 border-blue-600 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-black border-b border-blue-600/30 p-8 flex items-center justify-between">
               <div>
-                <h2
-                  className="text-3xl font-extrabold text-white"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                >
+                <h2 className="text-3xl font-extrabold text-white">
                   {selectedCollection.name}
                 </h2>
-                <p
-                  className="text-sm text-blue-400 mt-2"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                >
+                <p className="text-sm text-blue-400 mt-2">
                   {selectedCollection.count} DOCUMENTS
                 </p>
               </div>
@@ -288,13 +238,7 @@ export default function CollectionsPage() {
             </div>
 
             <div className="p-8">
-              <h3
-                className="text-xl text-blue-500 font-semibold mb-6"
-                style={{
-                  fontFamily: googleSansDisplay.style.fontFamily,
-                  fontWeight: 600,
-                }}
-              >
+              <h3 className="text-xl text-blue-500 font-semibold mb-6">
                 DOCUMENTS IN COLLECTION
               </h3>
 
@@ -303,7 +247,7 @@ export default function CollectionsPage() {
                   {selectedCollection.docs.map((doc, idx) => (
                     <div
                       key={idx}
-                      className="border-10 border-blue-600/50 p-6 bg-black/50 hover:bg-black/70 transition"
+                      className="border-5 border-blue-600/50 p-6 bg-black/50 hover:bg-black/70 transition"
                     >
                       <p className="text-white text-lg font-light">{doc}</p>
                     </div>
@@ -311,29 +255,19 @@ export default function CollectionsPage() {
                 </div>
               ) : (
                 <div className="text-center py-12">
-                  <p
-                    className="text-xl text-blue-400"
-                    style={{
-                      fontFamily: googleSansDisplay.style.fontFamily,
-                      fontWeight: 400,
-                    }}
-                  >
+                  <p className="text-xl text-blue-400">
                     No documents in this collection yet
                   </p>
                 </div>
               )}
 
               <div className="flex gap-4 pt-8 border-t border-blue-600/30">
-                <button
-                  className="flex-1 px-8 py-4 border-10 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
-                >
+                <button className="flex-1 px-8 py-4 border-5 border-blue-500 bg-blue-600/20 hover:bg-blue-600/30 transition font-extrabold">
                   ADD DOCUMENTS
                 </button>
                 <button
                   onClick={() => setSelectedCollection(null)}
-                  className="flex-1 px-8 py-4 border-10 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
-                  style={{ fontFamily: googleSansDisplay.style.fontFamily }}
+                  className="flex-1 px-8 py-4 border-5 border-gray-600 hover:bg-gray-600/20 transition font-extrabold text-gray-400"
                 >
                   CLOSE
                 </button>
